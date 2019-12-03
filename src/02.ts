@@ -2,8 +2,8 @@ var fs = require("fs");
 
 function read_file(file_name: string): number[] {
   var text = fs.readFileSync(file_name).toString('utf-8');
-  var textByLine = text.split(",");
-  var to_number = textByLine.map(text => Number(text));
+  var textByComma = text.split(",");
+  var to_number = textByComma.map(text => Number(text));
   return to_number
 }
 
