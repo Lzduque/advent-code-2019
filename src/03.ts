@@ -11,48 +11,59 @@ function read_file(file_name: string): object {
     return { wire1: textByComma[0], wire2: textByComma[1] }
 }
 
-// make grid
-// var grid = {
-//     A: {
-//         0: {
-//             1: 0, 2: 0
-//         },
-//         1: {
-//             1: 0, 2: 0
-//         },
-//         2: {
-//             1: 0, 2: 0
-//         },
-//         3: {
-//             1: 0, 2: 0
-//         },
-//         4: {
-//             1: 0, 2: 0
-//         }
-//     },
-//     B: {
-//         0: {
-//             1: 0, 2: 0
-//         },
-//         1: {
-//             1: 0, 2: 0
-//         },
-//         2: {
-//             1: 0, 2: 0
-//         },
-//         3: {
-//             1: 0, 2: 0
-//         },
-//         4: {
-//             1: 0, 2: 0
-//         }
-//     }
-// }
-let grid = {}
+function make_wire(wire: object[]) {
+    let coord: any = [0, 0];
+    let response: any = [[0, 0]];
+
+    for (let i = 0; i < wire.length; i++) {
+        if (wire[i]["dir"] == "U") {
+            for (let j = coord[1] + 1; j < wire[i]["dist"]; j++) {
+                let coord_x: any = coord[0];
+                let coord_y: any = coord[1] + 1;
+                let coordenates: any = [coord_x, coord_y];
+                response << coordenates;
+            }
+        }
+        if (wire[i]["dir"] == "D") {
+            for (let j = coord[1] + 1; j < wire[i]["dist"]; j--) {
+                let coord_x: any = coord[0];
+                let coord_y: any = coord[1] - 1;
+                let coordenates: any = [coord_x, coord_y];
+                response << coordenates;
+            }
+        }
+        if (wire[i]["dir"] == "R") {
+            for (let j = coord[0] + 1; j < wire[i]["dist"]; j++) {
+                let coord_x: any = coord[0] + 1;
+                let coord_y: any = coord[1];
+                let coordenates: any = [coord_x, coord_y];
+                response << coordenates;
+            }
+        }
+        if (wire[i]["dir"] == "L") {
+            for (let j = coord[0] - 1; j < wire[i]["dist"]; j--) {
+                let coord_x: any = coord[0] - 1;
+                let coord_y: any = coord[1];
+                let coordenates: any = [coord_x, coord_y];
+                response << coordenates;
+            }
+        }
+    }
+    return response;
+}
 
 // read instructions and change the grid when they pass through a point => 0 to 1
-function draw_path(wire1: object[], wire2: object[], grid: object = {}): object {
-    return {}
+function draw_path(wire1: object[], wire2: object[]): number[][] {
+    // const wire2 = [{ dir: 'U', dist: '2' }, { dir: 'R', dist: '4' }, { dir: 'D', dist: '1' }]
+    const wire1_path = make_wire(wire1);
+    const wire2_path = make_wire(wire2);
+    let response: any = []
+    for (let i = 0; i < wire1_path.length; i++) {
+        if (wire2_path.includes(wire1_path[i])) {
+            response << wire1_path[i]
+        }
+    }
+    return response
 }
 
 // loop through the new hash and get all points where there was an instersection => { 1: 1, 2: 1 }
