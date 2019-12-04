@@ -13,47 +13,69 @@ function read_file(file_name: string): object {
 
 function make_wire(wire: object[]) {
     let coord: any = [0, 0];
-    let response: any = [[0, 0]];
+    let response: any[] = [];
+    console.log("wire: ", wire);
+    console.log("wire.length: ", wire.length);
 
     for (let i = 0; i < wire.length; i++) {
-        if (wire[i]["dir"] == "U") {
-            for (let j = coord[1] + 1; j < wire[i]["dist"]; j++) {
+        console.log("coord: ", coord);
+        console.log("response: ", response);
+
+        if (wire[i]["dir"] === "U") {
+            console.log("U");
+            console.log("coord[1]: ", coord[1]);
+            for (let j = coord[1] + 1; j <= wire[i]["dist"]; j++) {
                 let coord_x: any = coord[0];
                 let coord_y: any = coord[1] + 1;
                 let coordenates: any = [coord_x, coord_y];
-                response << coordenates;
+                console.log("coordenates: ", coordenates)
+                coord = coordenates;
+                response.push(coordenates);
             }
         }
-        if (wire[i]["dir"] == "D") {
-            for (let j = coord[1] + 1; j < wire[i]["dist"]; j--) {
-                let coord_x: any = coord[0];
-                let coord_y: any = coord[1] - 1;
-                let coordenates: any = [coord_x, coord_y];
-                response << coordenates;
-            }
-        }
-        if (wire[i]["dir"] == "R") {
-            for (let j = coord[0] + 1; j < wire[i]["dist"]; j++) {
-                let coord_x: any = coord[0] + 1;
-                let coord_y: any = coord[1];
-                let coordenates: any = [coord_x, coord_y];
-                response << coordenates;
-            }
-        }
-        if (wire[i]["dir"] == "L") {
-            for (let j = coord[0] - 1; j < wire[i]["dist"]; j--) {
+        if (wire[i]["dir"] === "D") {
+            console.log("L");
+            console.log("coord[0]: ", coord[0]);
+            for (let j = coord[0] - 1; j <= wire[i]["dist"]; j--) {
                 let coord_x: any = coord[0] - 1;
                 let coord_y: any = coord[1];
                 let coordenates: any = [coord_x, coord_y];
-                response << coordenates;
+                console.log("coordenates: ", coordenates)
+                coord = coordenates;
+                response.push(coordenates);
+            }
+        }
+        if (wire[i]["dir"] === "R") {
+            console.log("R");
+            console.log("coord[0]: ", coord[0]);
+            for (let j = coord[0] + 1; j <= wire[i]["dist"]; j++) {
+                let coord_x: any = coord[0] + 1;
+                let coord_y: any = coord[1];
+                let coordenates: any = [coord_x, coord_y];
+                console.log("coordenates: ", coordenates)
+                coord = coordenates;
+                response.push(coordenates);
+            }
+        }
+        if (wire[i]["dir"] === "L") {
+            console.log("L");
+            console.log("coord[0]: ", coord[0]);
+            for (let j = coord[0] - 1; j <= wire[i]["dist"]; j--) {
+                let coord_x: any = coord[0] - 1;
+                let coord_y: any = coord[1];
+                let coordenates: any = [coord_x, coord_y];
+                console.log("coordenates: ", coordenates)
+                coord = coordenates;
+                response.push(coordenates);
             }
         }
     }
+    console.log("response: ", response)
     return response;
 }
 
-const wire1 = [{ dir: 'R', dist: '3' }, { dir: 'U', dist: '4' }, { dir: 'L', dist: '1' }]
-const wire2 = [{ dir: 'U', dist: '2' }, { dir: 'R', dist: '4' }, { dir: 'D', dist: '1' }]
+const wire1 = [{ dir: 'R', dist: '3' }, { dir: 'U', dist: '4' }, { dir: 'L', dist: '1' }];
+const wire2 = [{ dir: 'U', dist: '2' }, { dir: 'R', dist: '4' }, { dir: 'D', dist: '1' }];
 
 const wire1_path = make_wire(wire1);
 const wire2_path = make_wire(wire2);
@@ -79,6 +101,6 @@ function draw_path(wire1: object[], wire2: object[]): number[][] {
 
 // Calculate the manhatan distance from all of the points and return the one closer to the start point
 
-var input = read_file("./src/input_03.txt");
+// var input = read_file("./src/input_03.txt");
 
 export default draw_path;
