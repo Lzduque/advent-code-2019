@@ -52,6 +52,15 @@ function make_wire(wire: object[]) {
     return response;
 }
 
+const wire1 = [{ dir: 'R', dist: '3' }, { dir: 'U', dist: '4' }, { dir: 'L', dist: '1' }]
+const wire2 = [{ dir: 'U', dist: '2' }, { dir: 'R', dist: '4' }, { dir: 'D', dist: '1' }]
+
+const wire1_path = make_wire(wire1);
+const wire2_path = make_wire(wire2);
+
+console.log("wire1_path: ", wire1_path);
+console.log("wire2_path: ", wire2_path);
+
 // read instructions and change the grid when they pass through a point => 0 to 1
 function draw_path(wire1: object[], wire2: object[]): number[][] {
     // const wire2 = [{ dir: 'U', dist: '2' }, { dir: 'R', dist: '4' }, { dir: 'D', dist: '1' }]
