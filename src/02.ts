@@ -35,7 +35,7 @@ function opcode(input: number[]) {
         break;
       }
       case 99: {
-        console.log("Program finished running");
+        // console.log("Program finished running");
         return new_array;
       }
       default:
