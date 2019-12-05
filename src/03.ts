@@ -103,4 +103,4 @@ function draw_path(wire1: object[], wire2: object[]): number[][] {
 
 // var input = read_file("./src/input_03.txt");
 
-export default draw_path;
+export default make_wire;
